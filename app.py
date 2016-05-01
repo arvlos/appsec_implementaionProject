@@ -9,14 +9,15 @@ import sys
 # The storage file filename
 FILE_NAME = "storage.txt"
 
-
+# Function that opens the specified file in the append mode 
+# 	and writes the provided strings to it
 def writeToFile(filename, login, password):
 	storage = open(filename, "a")
 	storage.write("(" + login + ", " + password + ")\n")
 	storage.close()
 
 
-
+# The main function of the app
 if __name__ == "__main__":
 
 	if len(sys.argv) != 4:
