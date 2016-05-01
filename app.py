@@ -1,10 +1,13 @@
 # app.py
 # Created May 1, 2016 by Artem V. Losev
+
 # Created as a part of the "Implementation Project" assignment for
 # 	Application Security class at NYU Tandon School of Engineering
 
 
 import sys
+from Crypto.Cipher import AES
+
 
 # The storage file filename
 FILE_NAME = "storage.txt"
