@@ -10,13 +10,33 @@ from Crypto.Cipher import AES
 from Crypto import Random 
 
 
-# The storage file filename
+# The database file name
 DB_FILE_NAME = "storage.txt"
+
+# The encryption key file name
 KEY_FILE_NAME = "key.txt"
 
+# Generates a 16-byte AES key and stores it in a file
+# 	If the file exists, retrieves the stored key
+def generateKey(filename):
 
-# def generateKey(filename):
-# 	file = open(filename, "")
+	while True;
+		try:
+			file = open(filename, "r")
+			break
+		except IOError:
+			file = open(filename, "w")
+			key = Random.new().read(AES.block_size)
+			file.write(key + "\n")
+			file.close()
+			return key
+
+	key = file.read(AES.block_size)
+	file.close()
+	return key
+
+
+	
 
 # Function that opens the specified file in the append mode 
 # 	and writes the provided strings to it
