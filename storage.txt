@@ -1,5 +1,2 @@
-(artem, artem1)
-(test, pass)
-(test2, pass2)
-(test3, pass3)
+(artem, vlad)
 (john, smith)

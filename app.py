@@ -7,10 +7,16 @@
 
 import sys
 from Crypto.Cipher import AES
+from Crypto import Random 
 
 
 # The storage file filename
-FILE_NAME = "storage.txt"
+DB_FILE_NAME = "storage.txt"
+KEY_FILE_NAME = "key.txt"
+
+
+# def generateKey(filename):
+# 	file = open(filename, "")
 
 # Function that opens the specified file in the append mode 
 # 	and writes the provided strings to it
@@ -25,7 +31,18 @@ def writeToFile(filename, login, password):
 # 	If the login is found, it checks the password as well.
 # 	Returns True if login is found, False otherwise
 def searchFile(filename, login, password):
-	file = open(filename, "r")
+
+	# Check if the file exists, if not - create it
+	while True:
+		try:
+			file = open(filename, "r")
+			break
+		except IOError:
+			file = open(filename, "w")
+			file.close()
+			return False
+
+
 	loginStr = "(" + login + ", "
 	passStr = ", " + password + ")"
 	for line in file:
@@ -49,7 +66,7 @@ if __name__ == "__main__":
 		print "Usage: python app.py <name> <password> <encryption_mode>"
 		sys.exit()
 
-	if searchFile(FILE_NAME, sys.argv[1], sys.argv[2]) == False:
-		print "The username doesn't exist, so a new one will be created."
-		writeToFile(FILE_NAME, sys.argv[1], sys.argv[2])
+	if searchFile(DB_FILE_NAME, sys.argv[1], sys.argv[2]) == False:
+		print "The username doesn't exist; a new pair will be created."
+		writeToFile(DB_FILE_NAME, sys.argv[1], sys.argv[2])
 
